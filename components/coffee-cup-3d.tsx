@@ -20,22 +20,22 @@ function CoffeeCupGeometry() {
       {/* Cup body */}
       <mesh position={[0, -0.2, 0]}>
         <cylinderGeometry args={[0.6, 0.45, 1.1, 32]} />
-        <meshStandardMaterial color="#c0540a" metalness={0.3} roughness={0.4} />
+        <meshStandardMaterial color="#e8e8e8" metalness={0.2} roughness={0.3} />
       </mesh>
       {/* Cup rim */}
       <mesh position={[0, 0.35, 0]}>
         <torusGeometry args={[0.62, 0.06, 16, 32]} />
-        <meshStandardMaterial color="#a04008" metalness={0.4} roughness={0.3} />
+        <meshStandardMaterial color="#ffffff" metalness={0.3} roughness={0.2} />
       </mesh>
       {/* Handle */}
       <mesh position={[0.78, -0.1, 0]} rotation={[0, 0, Math.PI / 2]}>
         <torusGeometry args={[0.3, 0.07, 12, 24, Math.PI]} />
-        <meshStandardMaterial color="#a04008" metalness={0.3} roughness={0.4} />
+        <meshStandardMaterial color="#ffffff" metalness={0.2} roughness={0.3} />
       </mesh>
       {/* Coffee surface */}
       <mesh position={[0, 0.3, 0]}>
         <circleGeometry args={[0.57, 32]} />
-        <meshStandardMaterial color="#3b1a08" metalness={0.1} roughness={0.8} />
+        <meshStandardMaterial color="#1a1a1a" metalness={0.1} roughness={0.9} />
       </mesh>
       {/* Steam wisps */}
       {[-0.2, 0, 0.2].map((x, i) => (
@@ -47,7 +47,7 @@ function CoffeeCupGeometry() {
       {/* Saucer */}
       <mesh position={[0, -0.82, 0]}>
         <cylinderGeometry args={[0.9, 0.85, 0.12, 32]} />
-        <meshStandardMaterial color="#8b6f47" metalness={0.4} roughness={0.3} />
+        <meshStandardMaterial color="#ffffff" metalness={0.5} roughness={0.3} />
       </mesh>
     </group>
   )
@@ -88,7 +88,7 @@ export default function CoffeeCupScene() {
       {/* Lighting */}
       <ambientLight intensity={0.9} />
       <directionalLight position={[4, 6, 4]} intensity={1.8} />
-      <pointLight position={[-4, 2, 4]} intensity={0.8} color="#e85d3d" />
+      <pointLight position={[-4, 2, 4]} intensity={0.8} color="#ffffff" />
 
       {/* Try to load GLB, fall back to geometric cup */}
       <Suspense fallback={<CoffeeCupGeometry />}>

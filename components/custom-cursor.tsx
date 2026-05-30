@@ -76,14 +76,14 @@ export default function CustomCursor() {
           y: ringY,
           translateX: '-50%',
           translateY: '-50%',
-          border: '1.5px solid rgba(232,93,61,0.6)',
+          border: '1.5px solid rgba(255,255,255,0.5)',
         }}
         animate={{
           width:           hovering ? 56 : clicking ? 20 : 36,
           height:          hovering ? 56 : clicking ? 20 : 36,
           opacity:         visible  ? 1  : 0,
-          backgroundColor: hovering ? 'rgba(232,93,61,0.15)' : 'transparent',
-          borderColor:     hovering ? 'rgba(232,93,61,0.9)'  : 'rgba(232,93,61,0.6)',
+          backgroundColor: hovering ? 'rgba(255,255,255,0.12)' : 'transparent',
+          borderColor:     hovering ? 'rgba(255,255,255,0.9)'  : 'rgba(255,255,255,0.5)',
           borderWidth:     hovering ? 1.5 : 1,
         }}
         transition={{ duration: 0.2, ease: 'easeOut' }}
@@ -94,7 +94,7 @@ export default function CustomCursor() {
             initial={{ opacity: 0, scale: 0.6 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.6 }}
-            className="absolute inset-0 flex items-center justify-center text-[8px] font-semibold uppercase tracking-widest text-primary"
+            className="absolute inset-0 flex items-center justify-center text-[8px] font-semibold uppercase tracking-widest text-white"
           >
             {hoverText}
           </motion.span>
@@ -115,7 +115,7 @@ export default function CustomCursor() {
           height:  hovering ? 6  : clicking ? 12 : 6,
           opacity: visible ? 1 : 0,
           scale:   clicking ? 0.6 : 1,
-          backgroundColor: hovering ? '#ffffff' : '#e85d3d',
+          backgroundColor: hovering ? '#aaaaaa' : '#ffffff',
         }}
         transition={{ duration: 0.15, ease: 'easeOut' }}
       />
@@ -129,7 +129,7 @@ export default function CustomCursor() {
             y: dotY,
             translateX: '-50%',
             translateY: '-50%',
-            background: 'radial-gradient(circle, rgba(232,93,61,0.4) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%)',
           }}
           initial={{ width: 0, height: 0, opacity: 0.8 }}
           animate={{ width: 80, height: 80, opacity: 0 }}

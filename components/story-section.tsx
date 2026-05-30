@@ -74,7 +74,7 @@ function FloatingBeans() {
           scale={b.scale}
         >
           <sphereGeometry args={[1, 8, 6]} />
-          <meshStandardMaterial color="#3d1a05" metalness={0.6} roughness={0.3} />
+          <meshStandardMaterial color="#cccccc" metalness={0.7} roughness={0.2} />
         </mesh>
       ))}
     </group>
@@ -92,7 +92,7 @@ function GlowRing() {
   return (
     <mesh ref={meshRef} position={[0, -1.05, 0]} rotation={[-Math.PI / 2, 0, 0]}>
       <ringGeometry args={[0.9, 1.3, 64]} />
-      <meshBasicMaterial color="#e85d3d" transparent opacity={0.18} />
+      <meshBasicMaterial color="#ffffff" transparent opacity={0.12} />
     </mesh>
   )
 }
@@ -151,8 +151,8 @@ export default function StorySection() {
   return (
     <section ref={sectionRef} id="story" className="py-28 px-4 sm:px-6 lg:px-8 bg-background relative overflow-hidden">
       {/* Ambient glow blobs */}
-      <div className="pointer-events-none absolute -top-32 -left-32 w-96 h-96 rounded-full bg-primary/10 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-primary/8 blur-3xl" />
+      <div className="pointer-events-none absolute -top-32 -left-32 w-96 h-96 rounded-full bg-white/5 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-white/4 blur-3xl" />
 
       <div className="max-w-7xl mx-auto">
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'center' }}>
@@ -165,12 +165,12 @@ export default function StorySection() {
             {/* Gradient border glow */}
             <div
               className="absolute inset-0 rounded-3xl z-10 pointer-events-none"
-              style={{ boxShadow: 'inset 0 0 0 1px rgba(232,93,61,0.25), 0 0 80px rgba(232,93,61,0.12)' }}
+              style={{ boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.12), 0 0 80px rgba(255,255,255,0.06)' }}
             />
             {/* Dark background with radial gradient */}
             <div
               className="absolute inset-0"
-              style={{ background: 'radial-gradient(ellipse at 50% 60%, rgba(232,93,61,0.12) 0%, rgba(20,8,4,0.98) 70%)' }}
+              style={{ background: 'radial-gradient(ellipse at 50% 60%, rgba(255,255,255,0.07) 0%, rgba(10,10,10,0.98) 70%)' }}
             />
             <Canvas
               style={{ background: 'transparent', position: 'relative', zIndex: 1 }}
@@ -183,8 +183,8 @@ export default function StorySection() {
               {/* Lights */}
               <ambientLight intensity={0.4} />
               <directionalLight position={[3, 6, 4]} intensity={2.5} color="#fff5e6" />
-              <pointLight position={[-3, 2, 2]} intensity={1.2} color="#e85d3d" />
-              <pointLight position={[3, -1, -2]} intensity={0.6} color="#8b4513" />
+              <pointLight position={[-3, 2, 2]} intensity={1.2} color="#ffffff" />
+              <pointLight position={[3, -1, -2]} intensity={0.6} color="#aaaaaa" />
               <spotLight position={[0, 8, 0]} intensity={1.8} angle={0.4} penumbra={0.8} color="#ffffff" />
 
               <Environment preset="warehouse" />
@@ -199,7 +199,7 @@ export default function StorySection() {
                   opacity={0.6}
                   scale={4}
                   blur={2.5}
-                  color="#e85d3d"
+                  color="#ffffff"
                 />
               </Suspense>
 
@@ -281,7 +281,7 @@ export default function StorySection() {
               style={{ y: yCta }}
               custom={0.45} variants={variants} initial="hidden" animate={visible ? 'visible' : 'hidden'}
               className="flex gap-4">
-              <button className="px-7 py-3.5 bg-primary text-primary-foreground rounded-xl font-semibold hover:opacity-90 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/30">
+              <button className="px-7 py-3.5 bg-primary text-primary-foreground rounded-xl font-semibold hover:opacity-90 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white/20">
                 Discover Our Farmers
               </button>
               <button className="px-7 py-3.5 border border-border text-foreground rounded-xl font-semibold hover:border-primary/60 hover:text-primary transition-all duration-300">
