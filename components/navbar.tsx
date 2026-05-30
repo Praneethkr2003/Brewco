@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
+import ThemeToggle from './theme-toggle'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -34,6 +35,7 @@ export default function Navbar() {
 
           {/* Right side buttons */}
           <div className="hidden md:flex gap-4 items-center">
+            <ThemeToggle />
             <button className="text-foreground hover:text-primary transition-colors">
               Account
             </button>
@@ -42,13 +44,16 @@ export default function Navbar() {
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-foreground hover:text-primary transition-colors"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile: theme toggle + hamburger */}
+          <div className="md:hidden flex items-center gap-3">
+            <ThemeToggle />
+            <button
+              className="text-foreground hover:text-primary transition-colors"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}

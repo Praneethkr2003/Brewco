@@ -35,7 +35,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`dark bg-background ${playfair.variable} ${inter.variable}`}>
+    <html lang="en" className={`bg-background ${playfair.variable} ${inter.variable}`} suppressHydrationWarning>
       <body className="antialiased" style={{ fontFamily: 'var(--font-inter), system-ui, sans-serif' }}>
         <RootProvider>
           {children}
