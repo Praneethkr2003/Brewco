@@ -8,12 +8,12 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 const menuItems = [
-  { id: 1, name: 'Ethiopian Highlands', region: 'Yirgacheffe, Ethiopia',         notes: 'Floral, Berry, Tea-like',        price: '$18' },
-  { id: 2, name: 'Colombian Reserve',   region: 'Huila, Colombia',               notes: 'Chocolate, Nut, Caramel',        price: '$16' },
-  { id: 3, name: 'Kenyan AA',           region: 'Central Highlands, Kenya',      notes: 'Blackcurrant, Grapefruit, Wine', price: '$17' },
-  { id: 4, name: 'Brazilian Blend',     region: 'Minas Gerais, Brazil',          notes: 'Chocolate, Almond, Smooth',      price: '$15' },
-  { id: 5, name: 'Tanzanian Peaberry',  region: 'Arusha, Tanzania',              notes: 'Jasmine, Citrus, Clean',         price: '$19' },
-  { id: 6, name: 'Indonesian Dark',     region: 'Sumatra, Indonesia',            notes: 'Earthy, Cocoa, Bold',            price: '$16' },
+  { id: 1, name: 'Ethiopian Highlands', region: 'Yirgacheffe, Ethiopia',         notes: 'Floral, Berry, Tea-like',        price: '$18', img: '/coffee-ethiopian.png' },
+  { id: 2, name: 'Colombian Reserve',   region: 'Huila, Colombia',               notes: 'Chocolate, Nut, Caramel',        price: '$16', img: '/coffee-colombian.png' },
+  { id: 3, name: 'Kenyan AA',           region: 'Central Highlands, Kenya',      notes: 'Blackcurrant, Grapefruit, Wine', price: '$17', img: '/coffee-kenyan.png'    },
+  { id: 4, name: 'Brazilian Blend',     region: 'Minas Gerais, Brazil',          notes: 'Chocolate, Almond, Smooth',      price: '$15', img: '/coffee-brazilian.png' },
+  { id: 5, name: 'Tanzanian Peaberry',  region: 'Arusha, Tanzania',              notes: 'Jasmine, Citrus, Clean',         price: '$19', img: '/coffee-tanzanian.png' },
+  { id: 6, name: 'Indonesian Dark',     region: 'Sumatra, Indonesia',            notes: 'Earthy, Cocoa, Bold',            price: '$16', img: '/coffee-indonesian.png'},
 ]
 
 export default function MenuSection() {
@@ -85,8 +85,16 @@ export default function MenuSection() {
               key={item.id}
               className="menu-card group bg-card border border-border rounded-2xl p-8 hover:border-primary transition-all duration-300 cursor-pointer hover:shadow-lg hover:shadow-primary/10"
             >
-              <div className="h-48 bg-gradient-to-br from-primary/20 to-primary/5 rounded-xl mb-6 flex items-center justify-center overflow-hidden">
-                <div className="text-6xl opacity-20 group-hover:scale-110 transition-transform duration-300">☕</div>
+              {/* Card image */}
+              <div className="relative h-48 rounded-xl mb-6 overflow-hidden">
+                <Image
+                  src={item.img}
+                  alt={item.name}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent" />
               </div>
               <h3 className="text-xl font-bold text-foreground mb-2">{item.name}</h3>
               <p className="text-sm text-primary mb-4">{item.region}</p>
