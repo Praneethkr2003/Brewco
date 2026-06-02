@@ -1,12 +1,11 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useMemo, Suspense } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useGLTF, OrbitControls, PerspectiveCamera, Environment, Float, ContactShadows } from '@react-three/drei'
 import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing'
 import { Group } from 'three'
-import dynamic from 'next/dynamic'
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
@@ -22,6 +21,10 @@ function useIsMobile() {
 }
 
 // ─── 3D Scene ───────────────────────────────────────────────────────────────
+
+// Preload both models
+useGLTF.preload('/coffee_cup.glb')
+useGLTF.preload('/coffee_beans.glb')
 
 function CoffeeCupModel() {
   const groupRef = useRef<Group>(null)
@@ -39,6 +42,49 @@ function CoffeeCupModel() {
         <primitive object={scene} />
       </group>
     </Float>
+  )
+}
+
+// Individual orbiting coffee bean (own GLB clone so each is independent)
+function CoffeeBean({ index, total }: { index: number; total: number }) {
+  const { scene } = useGLTF('/coffee_beans.glb')
+  const clonedScene = useMemo(() => scene.clone(true), [scene])
+  const ref = useRef<Group>(null)
+
+  const radius = 1.85
+  const baseAngle = (index / total) * Math.PI * 2
+  const yOffset = Math.sin(index * 1.3) * 0.45
+  const scale = 0.022 + (index % 3) * 0.006
+  const speed = 0.12 + (index % 4) * 0.015
+  const wobble = index * 0.9
+
+  useFrame(({ clock }) => {
+    if (!ref.current) return
+    const t = clock.getElapsedTime()
+    const angle = baseAngle + t * speed
+    ref.current.position.x = Math.cos(angle) * radius
+    ref.current.position.z = Math.sin(angle) * radius
+    ref.current.position.y = yOffset + Math.sin(t * 0.6 + wobble) * 0.12
+    // Tumble rotation as they orbit
+    ref.current.rotation.x = t * 0.4 + wobble
+    ref.current.rotation.y = t * 0.6 + wobble
+    ref.current.rotation.z = t * 0.25
+  })
+
+  return (
+    <group ref={ref} scale={[scale, scale, scale]}>
+      <primitive object={clonedScene} />
+    </group>
+  )
+}
+
+function OrbitingBeans({ count = 8 }: { count?: number }) {
+  return (
+    <>
+      {Array.from({ length: count }, (_, i) => (
+        <CoffeeBean key={i} index={i} total={count} />
+      ))}
+    </>
   )
 }
 
@@ -112,7 +158,10 @@ function DesktopCanvas() {
         <pointLight position={[-3, 2, 2]} intensity={1.0} color="#e85d3d" />
         <spotLight position={[0, 8, 0]} intensity={1.5} angle={0.4} penumbra={0.8} />
         <Environment preset="warehouse" />
-        <CoffeeCupModel />
+        <Suspense fallback={null}>
+          <CoffeeCupModel />
+          <OrbitingBeans count={8} />
+        </Suspense>
         <SteamParticles />
         <GlowRing />
         <ContactShadows position={[0, -1.1, 0]} opacity={0.5} scale={4} blur={2} color="#e85d3d" />
