@@ -123,20 +123,7 @@ function SteamParticles() {
   )
 }
 
-function GlowRing() {
-  const meshRef = useRef<any>(null)
-  useFrame(({ clock }) => {
-    if (!meshRef.current) return
-    const s = 1 + Math.sin(clock.getElapsedTime() * 1.5) * 0.05
-    meshRef.current.scale.set(s, 1, s)
-  })
-  return (
-    <mesh ref={meshRef} position={[0, -1.1, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-      <ringGeometry args={[0.9, 1.3, 64]} />
-      <meshBasicMaterial color="#e85d3d" transparent opacity={0.15} />
-    </mesh>
-  )
-}
+
 
 // Desktop 3D canvas (heavy — only rendered on md+)
 function DesktopCanvas() {
@@ -163,7 +150,6 @@ function DesktopCanvas() {
           <OrbitingBeans count={8} />
         </Suspense>
         <SteamParticles />
-        <GlowRing />
         <ContactShadows position={[0, -1.1, 0]} opacity={0.5} scale={4} blur={2} color="#e85d3d" />
         <EffectComposer>
           <Bloom intensity={0.7} luminanceThreshold={0.6} luminanceSmoothing={0.9} />
