@@ -11,6 +11,7 @@ export default function CustomCursor() {
   const [hovering, setHovering] = useState(false)
   const [hoverText, setHoverText] = useState('')
   const [mounted, setMounted]   = useState(false)
+  const [isTouch, setIsTouch]   = useState(false)
 
   const mouseX = useMotionValue(-100)
   const mouseY = useMotionValue(-100)
@@ -20,7 +21,11 @@ export default function CustomCursor() {
   const ringX = useSpring(mouseX, { stiffness: 120,  damping: 20,  mass: 0.5 })
   const ringY = useSpring(mouseY, { stiffness: 120,  damping: 20,  mass: 0.5 })
 
-  useEffect(() => setMounted(true), [])
+  useEffect(() => {
+    setMounted(true)
+    // Detect touch devices — disable cursor entirely
+    setIsTouch(window.matchMedia('(pointer: coarse)').matches)
+  }, [])
 
   useEffect(() => {
     const move = (e: MouseEvent) => {
@@ -70,7 +75,7 @@ export default function CustomCursor() {
   const glowColor     = isLight ? 'rgba(232,93,61,0.5)'  : 'rgba(232,93,61,0.4)'
   const mixBlend      = isLight ? 'multiply' : 'normal'
 
-  if (!mounted) return null
+  if (!mounted || isTouch) return null
 
   return (
     <>

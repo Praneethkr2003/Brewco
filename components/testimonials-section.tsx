@@ -40,14 +40,16 @@ export default function TestimonialsSection() {
       cards.forEach((card, index) => {
         gsap.fromTo(
           card,
-          { opacity: 0, x: index % 2 === 0 ? -50 : 50 },
+          { opacity: 0, y: 40 },
           {
             opacity: 1,
-            x: 0,
-            duration: 0.8,
+            y: 0,
+            duration: 0.7,
+            delay: index * 0.12,
+            ease: 'power3.out',
             scrollTrigger: {
               trigger: card,
-              start: 'top 75%',
+              start: 'top 78%',
             },
           }
         )
